@@ -37,7 +37,7 @@ class BotExample:
             return
 
         if hero.getAbilityPoints() > 0:
-            hero.level_up(random.randint(0, 3))
+            hero.level_up(random.randint(0, 4))
             return
 
         if hero.getName() == "npc_dota_hero_brewmaster":
