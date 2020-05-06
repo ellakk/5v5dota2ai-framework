@@ -77,6 +77,8 @@ class Experiment2:
     def pick_heroes(self):
         heroes = self.heroes_test[0:5]
         self.heroes_test = self.heroes_test[5:]
+        while len(heroes) != 5:
+            heroes.append(self.all_heroes[len(heroes)])
         return heroes
 
     def initialize(self, heroes):
@@ -94,7 +96,7 @@ class Experiment2:
     def runonce(self):
         heroes = self.world._get_player_heroes()
         for hero in heroes:
-            if hero.getName() in self.party:
+            if hero.getName() in self.party and hero.getName() not in self.passedHeroes:
                 self.passedHeroes.append(hero.getName())
         if self.heroes_test:
             self.party = self.pick_heroes()
@@ -109,7 +111,7 @@ class Experiment2:
             if difference:
                 print("TEST FAILED:")
                 print("The following heroes was never in the game: ")
-                for h in self.difference:
+                for h in difference:
                     print(h)
             else:
                 print("TEST PASSED:")
