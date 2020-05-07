@@ -11,14 +11,12 @@ import os
 class Experiment44:
     def __init__(self, world):
         self.party = [
-            "npc_dota_hero_crystal_maiden",
-            "npc_dota_hero_alchemist",
-            "npc_dota_hero_enigma",
-            "npc_dota_hero_disruptor",
+            "npc_dota_hero_crystal_maiden", "npc_dota_hero_alchemist",
+            "npc_dota_hero_enigma", "npc_dota_hero_disruptor",
             "npc_dota_hero_brewmaster"
         ]
         self.hero_target_area_abilities = {
-            "npc_dota_hero_crystal_maiden" : 0,
+            "npc_dota_hero_crystal_maiden": 0,
             "npc_dota_hero_alchemist": 0,
             "npc_dota_hero_enigma": 2,
             "npc_dota_hero_disruptor": 2,
@@ -35,8 +33,10 @@ class Experiment44:
         if hero.getAbilityPoints() > 0:
             hero.level_up(ability_index)
         elif self.world.gameticks == 15:
-            print("Hero {0} casting {1}".format(hero.getName(), hero.getAbilities()[str(ability_index)].getName()))
-            hero.cast(ability_index, position=hero.getOrigin())
+            print("Hero {0} casting {1}".format(
+                hero.getName(),
+                hero.getAbilities()[str(ability_index)].getName()))
+            hero.cast_target_area(ability_index, hero.getOrigin())
         elif self.world.gameticks == 20:
             self.assert_abilities_used()
 
