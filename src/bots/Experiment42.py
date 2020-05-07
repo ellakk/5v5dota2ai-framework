@@ -35,7 +35,7 @@ class Experiment42:
             self.toggle_assert = False
             self.assert_toggle_off()
         elif self.world.gameticks == 10:
-            hero.cast(ability_index)
+            hero.cast_toggle(ability_index)
         elif self.world.gameticks == 20:
             self.assert_toggle_on()
 

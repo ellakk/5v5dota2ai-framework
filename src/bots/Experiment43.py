@@ -32,7 +32,7 @@ class Experiment43:
             hero.level_up(ability_index)
         elif self.world.gameticks == 15:
             print("Hero {0} casting {1}".format(hero.getName(), hero.getAbilities()[str(ability_index)].getName()))
-            hero.cast(ability_index, position=hero.getOrigin())
+            hero.cast_target_point(ability_index, hero.getOrigin())
         elif self.world.gameticks == 20:
             self.assert_abilities_used()
 

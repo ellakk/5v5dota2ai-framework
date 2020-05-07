@@ -33,7 +33,7 @@ class Experiment41:
         if hero.getAbilityPoints() > 0:
             hero.level_up(ability_index)
         elif self.world.gameticks > 10 and self.world.gameticks < 20:
-            hero.cast(ability_index)
+            hero.cast_no_target(ability_index)
         elif self.world.gameticks == 20:
             self.assert_abilities_used()
 
