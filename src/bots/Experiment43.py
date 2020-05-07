@@ -6,19 +6,17 @@ import os
 class Experiment43:
     def __init__(self, world):
         self.party = [
-            "npc_dota_hero_techies",
-            "npc_dota_hero_spectre",
-            "npc_dota_hero_morphling",
-            "npc_dota_hero_lina",
+            "npc_dota_hero_techies", "npc_dota_hero_spectre",
+            "npc_dota_hero_morphling", "npc_dota_hero_lina",
             "npc_dota_hero_mars"
         ]
 
         self.hero_no_targets_abilities = {
-            "npc_dota_hero_techies": 2,    # proximity mines
-            "npc_dota_hero_spectre": 0,    # spectral dagger
+            "npc_dota_hero_techies": 2,  # proximity mines
+            "npc_dota_hero_spectre": 0,  # spectral dagger
             "npc_dota_hero_morphling": 0,  # waveform
-            "npc_dota_hero_lina": 1,       # light strke array
-            "npc_dota_hero_mars": 0,       # Spear of mars
+            "npc_dota_hero_lina": 1,  # light strke array
+            "npc_dota_hero_mars": 0,  # Spear of mars
         }
         self.world = world
 
@@ -31,7 +29,9 @@ class Experiment43:
         if hero.getAbilityPoints() > 0:
             hero.level_up(ability_index)
         elif self.world.gameticks == 15:
-            print("Hero {0} casting {1}".format(hero.getName(), hero.getAbilities()[str(ability_index)].getName()))
+            print("Hero {0} casting {1}".format(
+                hero.getName(),
+                hero.getAbilities()[str(ability_index)].getName()))
             hero.cast_target_point(ability_index, hero.getOrigin())
         elif self.world.gameticks == 20:
             self.assert_abilities_used()
