@@ -22,3 +22,6 @@ class BaseEntity:
 
     def getTeam(self):
         return self.data["team"]
+
+    def getForwardVector(self):
+        return self.data["forwardVector"]
