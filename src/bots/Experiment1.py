@@ -13,6 +13,7 @@ class Experiment1:
             "npc_dota_hero_axe",
         ]
         self.world = world
+        print("Starting Experiment 1:")
 
     def initialize(self, heroes):
         self.top_fallback_point = self.world.find_entity_by_name(
