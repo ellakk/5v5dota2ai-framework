@@ -55,7 +55,7 @@ class Experiment45:
             return int(enemy_id)
 
     def actions(self, hero):
-        if self.passed_heroes == 5 or self.world.gameticks > 1000:
+        if len(self.passed_heroes) == 5 or self.world.gameticks > 1000:
             self.print_end()
 
         if hero.getName() in self.passed_heroes:
@@ -69,7 +69,6 @@ class Experiment45:
         elif self.world.gameticks > 2 and hero.getName() == "npc_dota_hero_omniknight":
             fi = self.world.get_id(self.world.find_entity_by_name(
                 "npc_dota_hero_lina"))
-            print("FIIIIRE at lina who has id {}".format(fi))
             hero.cast_target_unit(ability_index, fi)
         elif self.world.gameticks > 5:
             eid = self.get_closest_enemy(hero)
@@ -79,10 +78,11 @@ class Experiment45:
     def print_end(self):
         print("------")
         for hero in self.passed_heroes:
-            print("PASSED: {0} cast {1}".format(
+            print("PASSED: {0} cast ability in slot {1}".format(
                 hero, self.hero_target_abilities[hero]))
-        if len(self.passed_heroes == 5):
+        if len(self.passed_heroes) == 5:
             print("TEST PASSED:")
         else:
             print("TEST FAILED:")
         print("{0}/{1} tests passed".format(len(self.passed_heroes), 5))
+        os._exit(1)
