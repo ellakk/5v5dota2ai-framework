@@ -29,8 +29,6 @@ class Experiment45:
 
     def initialize(self, wheroes):
         print("Starting Experiment 45:")
-        self.top_fallback_point = self.world.find_entity_by_name(
-            "dota_badguys_tower1_mid").getOrigin()
 
     def validate_ability_used(self, hero, index):
         if hero.getAbilities()[str(index)].getCooldownTimeRemaining() > 0:
