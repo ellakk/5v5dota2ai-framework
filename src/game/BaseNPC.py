@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from src.game.BaseEntity import BaseEntity
-from src.game.Ability import Ability
 
 
 class BaseNPC(BaseEntity):
@@ -12,6 +11,9 @@ class BaseNPC(BaseEntity):
 
     def getAttackTarget(self):
         return self.data["attackTarget"]
+
+    def isAttacking(self):
+        return self.data["isAttacking"]
 
     def getLevel(self):
         return self.data["level"]
