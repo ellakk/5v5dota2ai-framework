@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from src.game.BaseNPC import BaseNPC
-from src.game.BaseNPC import Ability
+from src.game.Ability import Ability
 
 
 class Hero(BaseNPC):
