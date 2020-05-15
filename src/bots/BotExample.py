@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-
 import random
+import os
+import datetime
 from src.game.Building import Building
 
 
@@ -13,6 +13,15 @@ class BotExample:
             "npc_dota_hero_beastmaster",
             "npc_dota_hero_axe",
         ]
+        self.hero_position = {
+            "npc_dota_hero_brewmaster": "MID",
+            "npc_dota_hero_doom_bringer": "TOP",
+            "npc_dota_hero_abyssal_underlord": "TOP",
+            "npc_dota_hero_beastmaster": "BOT",
+            "npc_dota_hero_axe": "BOT"
+        }
+        self.hero_position_original = self.hero_position.copy()
+        self.reset_lane_timer = datetime.datetime.now()
         self.world = world
 
     def initialize(self, heroes):
@@ -32,7 +41,6 @@ class BotExample:
             return
 
         if self.world.gameticks == 5:
-            print("Attempting to buy regen")
             self.buy_ring_of_regen(hero)
             return
 
@@ -40,20 +48,32 @@ class BotExample:
             hero.level_up(random.randint(0, 4))
             return
 
-        if hero.getName() == "npc_dota_hero_brewmaster":
-            self.actions_brewmaster(hero)
+        self.decide_lane()
+        fallback_point = self.get_hero_fallback_point(hero)
+        if self.flee_if_tower_aggro(hero, fallback_point):
+            return
+        self.push_lane(
+            hero,
+            fallback_point)
 
-        if hero.getName() == "npc_dota_hero_doom_bringer":
-            self.actions_doom(hero)
+    def decide_lane(self):
+        last_reset = (datetime.datetime.now() - self.reset_lane_timer).seconds
+        heroes = self.world._get_player_heroes()
+        lane = None
+        lane_deaths = -1
+        for hero in heroes:
+            if hero.getDeaths() > lane_deaths:
+                lane_deaths = hero.getDeaths()
+                lane = self.hero_position[hero.getName()]
 
-        if hero.getName() == "npc_dota_hero_abyssal_underlord":
-            self.actions_abyssal_underlord(hero)
-
-        if hero.getName() == "npc_dota_hero_beastmaster":
-            self.actions_beastmaster(hero)
-
-        if hero.getName() == "npc_dota_hero_axe":
-            self.actions_axe(hero)
+        if last_reset > 300 and self.hero_position != self.hero_position_original:
+            print("Resetting hero lanes")
+            self.hero_position = self.hero_position_original.copy()
+        elif last_reset > 300 and lane_deaths % 5 == 0:
+            self.reset_lane_timer = datetime.datetime.now()
+            print("Heros are pushing {}".format(lane))
+            for hero in self.hero_position:
+                self.hero_position[hero] = lane
 
     def buy_healing_salve(self, hero):
         if hero.getGold() > 110:
@@ -129,8 +149,7 @@ class BotExample:
             hero.cast(ability.getAbilityIndex(), position=enemy.getOrigin())
 
     def push_lane(self, hero, fallback_position):
-        if not hasattr(hero, "fallback_position"):
-            hero.fallback_position = fallback_position
+        hero.fallback_position = fallback_position
 
         if not hasattr(hero, "in_lane"):
             hero.in_lane = False
@@ -183,46 +202,16 @@ class BotExample:
                 close_creeps.append(c)
         return close_creeps
 
-    # Brew goes mid
-    def actions_brewmaster(self, hero):
-        if self.flee_if_tower_aggro(hero, self.mid_fallback_point):
-            return
-
-        self.push_lane(
-            hero,
-            self.mid_fallback_point)
-
-    # Doom goes bot
-    def actions_doom(self, hero):
-        if self.flee_if_tower_aggro(hero, self.bot_fallback_point):
-            return
-        self.push_lane(
-            hero,
-            self.bot_fallback_point)
-
-    # Beastmaster goes bot
-    def actions_beastmaster(self, hero):
-        if self.flee_if_tower_aggro(hero, self.bot_fallback_point):
-            return
-        self.push_lane(
-            hero,
-            self.bot_fallback_point)
-
-    # Underlord goes top
-    def actions_abyssal_underlord(self, hero):
-        if self.flee_if_tower_aggro(hero, self.top_fallback_point):
-            return
-        self.push_lane(
-            hero,
-            self.top_fallback_point)
-
-    # Axe goes top
-    def actions_axe(self, hero):
-        if self.flee_if_tower_aggro(hero, self.top_fallback_point):
-            return
-        self.push_lane(
-            hero,
-            self.top_fallback_point)
+    def get_hero_fallback_point(self, hero):
+        hero_name = hero.getName()
+        fallback_point = None
+        if self.hero_position[hero_name] == "TOP":
+            fallback_point = self.top_fallback_point
+        elif self.hero_position[hero_name] == "MID":
+            fallback_point = self.mid_fallback_point
+        elif self.hero_position[hero_name] == "BOT":
+            fallback_point = self.bot_fallback_point
+        return fallback_point
 
     def get_closes_creep_group(self, hero):
         creep_group = []
