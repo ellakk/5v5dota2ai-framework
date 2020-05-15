@@ -26,6 +26,12 @@ class World:
             else:
                 entity = self._create_entity_from_data(data)
             new_entities[eid] = entity
+
+        for eid, edata in self.entities.items():
+            if edata.data["type"] == "Hero" and edata.data["team"] == 2:
+                if eid not in new_entities:
+                    edata.data["alive"] = False
+                    new_entities[eid] = edata
         self.entities = new_entities
 
     def _create_entity_from_data(self, data):
