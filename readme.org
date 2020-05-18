@@ -1,0 +1,46 @@
+#+TITLE: 5v5 Dota 2 framework
+
+* About
+
+This is a DotA 2 bot framework intended to be run with the DoTa 2 [[https://github.com/ellakk/5v5dota2ai-addon][5V5 addon]].
+It has been developed by Dennis Nilsson and Kalle Lindqvist. It is based on
+the [[https://github.com/lightbringer][dota2ai project]] by Tobias Mahlmann. There is an example bot
+
+* Requirements
+
+To run this framework you need the following dependencies.
+
+- DotA 2
+- DotA 2 5v5 AI addon
+- Python 3.7 or above
+
+* Installation
+
+To install this framework all you need to do is clone this repository to your
+computer. The only python dependecy required is Bottle and it is included in our
+repository.
+
+* Running
+
+The framework has to be started before running the DotA 2 addon. You start it by
+issuing the following command in the terminal running from the root folder of
+this repository:
+
+#+BEGIN_SRC sh
+python framework.py --bot <botclass>
+#+END_SRC
+
+Where <botclass> is the name of the bot you want to run, example: If you want to
+run our BotExample bot located in the file BotExmple.py then you start the
+framework with this comamand:
+
+#+BEGIN_SRC sh
+python framework.py --bot BotExample
+#+END_SRC
+
+It is required that the class of the bot and the filename where it is
+implemented is the same as shown in the example above.
+
+* Implementing your own bots
+
+To start implementing your own bots you should start by having a look at the examples located in the src/bots folder. To see what attributes are available for the different classes you can check out the src/game folder. 
