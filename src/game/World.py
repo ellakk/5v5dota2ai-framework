@@ -114,10 +114,11 @@ class World:
     def get_enemy_towers(self, entity):
         towers = []
 
-        for entity in self.entities:
-            if isinstance(entity,
-                          Tower) and entity.getTeam() != entity.getTeam():
-                towers.append(entity)
+        for e in self.entities:
+            if isinstance(e,
+                          Tower) and e.getTeam() != entity.getTeam():
+                towers.append(e)
+         return towers
 
     def get_friendly_creeps(self, entity):
         creeps = []
