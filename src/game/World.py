@@ -118,7 +118,7 @@ class World:
             if isinstance(e,
                           Tower) and e.getTeam() != entity.getTeam():
                 towers.append(e)
-         return towers
+        return towers
 
     def get_friendly_creeps(self, entity):
         creeps = []
