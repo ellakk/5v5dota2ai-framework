@@ -1,12 +1,12 @@
-#+TITLE: 5v5 Dota 2 framework
+#5v5 Dota 2 framework
 
-* About
+## About
 
 This is a DotA 2 bot framework intended to be run with the DoTa 2 [[https://github.com/ellakk/5v5dota2ai-addon][5V5 addon]].
 It has been developed by Dennis Nilsson and Kalle Lindqvist. It is based on
 the [[https://github.com/lightbringer][dota2ai project]] by Tobias Mahlmann.
 
-* Requirements
+## Requirements
 
 To run this framework you need the following dependencies.
 
@@ -14,23 +14,23 @@ To run this framework you need the following dependencies.
 - DotA 2 5v5 AI addon
 - Python 3.7 or above
 
-* Installation
+## Installation
 
 To install this framework all you need to do is clone this repository to your
 computer. All requirements and dependencies are in the [requirements file](requirements.txt).
 
-* Running
+## Running
 
 The framework has to be started before running the DotA 2 addon. You start it by
 issuing the following command in the terminal running from src (Rememer to also set src as the root folder in PyCharm):
 
-#+BEGIN_SRC sh
+```console
 python framework.py
-#+END_SRC
+```
 
 Information about which bot is going to be used for Radiants and Dires, as well as their locations has to be set in the [settings file](setting.json)
 
-## Dota2AddonV1
+## Dota2 - FRAMEWORK V1
 
 ## User Manual
 
