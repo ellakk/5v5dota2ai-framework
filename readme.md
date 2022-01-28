@@ -133,7 +133,7 @@ To use a chat command, press enter followed by tab. You should now be in the "al
 
 ### Statistics
 
-The framework collects statistics from the game as it is running. There are three separate collection steps that can be utilized. All three types of statistics are handled by statistics.py and saved to files in the Server/statistics folder, which is created automatically if it doesn't exist. 
+The framework collects statistics from the game as it is running. There are three separate collection steps that can be utilized. All three types of statistics are handled by statistics.py and saved to files in the statistics folder, which is created automatically if it doesn't exist. 
 
 The three types of statistics that can be collected are: 
 1. Time series data. Some data is suitable for continuous collection to a csv file at predetermined intervals, such as each hero's current kills, deaths and current gold.
@@ -253,7 +253,7 @@ Since the game entities are saved every game tick, the corresponding JSON files 
 
 ### Generating Documentation
 
-The project uses [pdoc](https://github.com/mitmproxy/pdoc) to generate the API documentation found in the Documentation/api directory. To (re)generate this documentation execute the following command while being located in the Server/src directory:
+The project uses [pdoc](https://github.com/mitmproxy/pdoc) to generate the API documentation found in the Documentation/api directory. To (re)generate this documentation execute the following command while being located in the src directory:
 
 ```
 python -m pdoc -o ../../Documentation/api game/player_hero.py game/world.py
