@@ -28,7 +28,7 @@ issuing the following command in the terminal running from src (Rememer to also 
 python framework.py
 ```
 
-Information about which bot is going to be used for Radiants and Dires, as well as their locations has to be set in the [settings file](setting.json)
+Information about which bot is going to be used for Radiants and Dires, as well as their locations has to be set in the [settings file](settings.json)
 
 ## Dota2 - FRAMEWORK V1
 
