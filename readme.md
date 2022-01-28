@@ -2,9 +2,9 @@
 
 ## About
 
-This is a DotA 2 bot framework intended to be run with the DoTa 2 [[https://github.com/ellakk/5v5dota2ai-addon][5V5 addon]].
+This is a DotA 2 bot framework intended and needed to be run with the updated [DoTa 2 ADDON dota2ai](https://github.com/ellakk/5v5dota2ai-addon).
 It has been developed by Dennis Nilsson and Kalle Lindqvist. It is based on
-the [[https://github.com/lightbringer][dota2ai project]] by Tobias Mahlmann.
+this [project](https://github.com/lightbringer/dota2ai) by Tobias Mahlmann.
 
 ## Requirements
 
