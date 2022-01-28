@@ -1,0 +1,15 @@
+{
+  "base_dir_bots": "bots/test_bots/",
+  "radiant_bot_filename": "TestBotBasicSmart.py",
+  "radiant_bot_class_name": "TestBotBasicSmart",
+  "dire_bot_filename": "TestBotBasicSmart.py",
+  "dire_bot_class_name": "TestBotBasicSmart",
+  "native_bots_difficulty": "easy",
+  "should_have_pre_game_delay": false,
+  "should_dire_be_native_bots": false,
+  "grant_global_vision": false,
+  "spectator_mode": true,
+  "number_of_games": 2,
+  "auto_restart_client_on_server_restart": true,
+  "max_game_duration": -1
+}

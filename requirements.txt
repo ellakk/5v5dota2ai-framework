@@ -1,0 +1,16 @@
+atomicwrites==1.4.0
+attrs==21.2.0
+bottle==0.12.19
+colorama==0.4.4
+iniconfig==1.1.1
+Jinja2==3.0.3
+MarkupSafe==2.0.1
+packaging==21.0
+pdoc==8.0.1
+pluggy==1.0.0
+py==1.10.0
+Pygments==2.10.0
+pyparsing==2.4.7
+pytest==6.2.5
+toml==0.10.2
+waitress==2.0.0

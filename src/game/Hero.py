@@ -1,43 +1,39 @@
 #!/usr/bin/env python3
-from src.game.BaseNPC import BaseNPC
-from src.game.Ability import Ability
+from typing import cast
+from game.enums.entity_type import EntityType
+from game.post_data_interfaces.IEntity import IEntity
+from game.post_data_interfaces.IHero import IHero
+from game.unit import Unit
 
 
-class Hero(BaseNPC):
-    def __init__(self, data):
-        super().__init__(data)
-        self.abilities = {}
-        self.__set_abilities()
+class Hero(Unit):
 
-    def __set_abilities(self):
-        self.abilities = {}
-        for i, data in self.data["abilities"].items():
-            self.abilities[i] = Ability(data)
+    _has_tower_aggro: bool
+    _has_aggro: bool
+    _deaths: int
 
-    def setData(self, data):
-        super().setData(data)
-        self.__set_abilities()
+    def update(self, data: IEntity) -> None:
+        super().update(data)
+        hero_data = cast(IHero, data)
 
-    def getAbilityPoints(self):
-        return self.data["abilityPoints"]
+        self._has_tower_aggro = hero_data["hasTowerAggro"]
+        self._has_aggro = hero_data["hasAggro"]
+        self._deaths = hero_data["deaths"]
 
-    def getAbilities(self):
-        return self.abilities
+    def get_has_tower_aggro(self) -> bool:
+        """
+        Whether the hero is being attacked by a tower.
+        """
+        return self._has_tower_aggro
 
-    def getHasTowerAggro(self):
-        return self.data["hasTowerAggro"]
+    def get_has_aggro(self) -> bool:
+        """
+        Whether the hero is being attacked.
+        """
+        return self._has_aggro
 
-    def getDeaths(self):
-        return self.data["deaths"]
+    def get_deaths(self) -> int:
+        return self._deaths
 
-    def getDenies(self):
-        return self.data["denies"]
-
-    def getGold(self):
-        return self.data["gold"]
-
-    def getType(self):
-        return self.data["type"]
-
-    def getXp(self):
-        return self.data["xp"]
+    def get_type(self) -> EntityType:
+        return EntityType.HERO

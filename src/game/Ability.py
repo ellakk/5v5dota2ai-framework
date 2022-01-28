@@ -1,105 +1,96 @@
 #!/usr/bin/env python3
 
-from src.game.BaseEntity import BaseEntity
+from typing import cast
+from game.enums.entity_type import EntityType
+from game.post_data_interfaces.IAbility import IAbility
+from game.post_data_interfaces.IEntity import IEntity
+from game.base_entity import BaseEntity
 
 
 class Ability(BaseEntity):
-    DAMAGE_TYPE_NONE = 0
-    DAMAGE_TYPE_PHYSICAL = 1
-    DAMAGE_TYPE_MAGICAL = 2
-    DAMAGE_TYPE_PURE = 4
-    DAMAGE_TYPE_ALL = 7
-    DAMAGE_TYPE_HP_REMOVAL = 8
+    _target_flags: int
+    _target_team: int
+    _ability_damage_type: int
+    _toggle_state: bool
+    _ability_damage: int
+    _behavior: int
+    _ability_type: int
+    _max_level: int
+    _cooldown_time_remaining: float
+    _target_type: int
+    _ability_index: int
+    _type: str
+    _name: str
+    _level: int
+    _mana_cost: int
+    _hero_level_required_to_level_up: int
 
-    DOTA_ABILITY_BEHAVIOR_NONE = 0
-    DOTA_ABILITY_BEHAVIOR_HIDDEN = 1
-    DOTA_ABILITY_BEHAVIOR_PASSIVE = 2
-    DOTA_ABILITY_BEHAVIOR_NO_TARGET = 4
-    DOTA_ABILITY_BEHAVIOR_UNIT_TARGET = 8
-    DOTA_ABILITY_BEHAVIOR_POINT = 16
-    DOTA_ABILITY_BEHAVIOR_AOE = 32
-    DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE = 64
-    DOTA_ABILITY_BEHAVIOR_CHANNELLED = 128
-    DOTA_ABILITY_BEHAVIOR_ITEM = 256
-    DOTA_ABILITY_BEHAVIOR_TOGGLE = 512
-    DOTA_ABILITY_BEHAVIOR_DIRECTIONAL = 1024
-    DOTA_ABILITY_BEHAVIOR_IMMEDIATE = 2048
-    DOTA_ABILITY_BEHAVIOR_AUTOCAST = 4096
-    DOTA_ABILITY_BEHAVIOR_OPTIONAL_UNIT_TARGET = 8192
-    DOTA_ABILITY_BEHAVIOR_OPTIONAL_POINT = 16384
-    DOTA_ABILITY_BEHAVIOR_OPTIONAL_NO_TARGET = 32768
-    DOTA_ABILITY_BEHAVIOR_AURA = 65536
-    DOTA_ABILITY_BEHAVIOR_ATTACK = 131072
-    DOTA_ABILITY_BEHAVIOR_DONT_RESUME_MOVEMENT = 262144
-    DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES = 524288
-    DOTA_ABILITY_BEHAVIOR_UNRESTRICTED = 1048576
-    DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE = 2097152
-    DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL = 4194304
-    DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT = 8388608
-    DOTA_ABILITY_BEHAVIOR_DONT_ALERT_TARGET = 16777216
-    DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK = 33554432
-    DOTA_ABILITY_BEHAVIOR_NORMAL_WHEN_STOLEN = 67108864
-    DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING = 134217728
-    DOTA_ABILITY_BEHAVIOR_RUNE_TARGET = 268435456
-    DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_CHANNEL = 536870912
-    DOTA_ABILITY_LAST_BEHAVIOR = 536870912
+    def update(self, data: IEntity) -> None:
+        super().update(data)
+        ability_data: IAbility = cast(IAbility, data)
+        self._target_flags = ability_data["targetFlags"]
+        self._target_team = ability_data["targetTeam"]
+        self._ability_damage_type = ability_data["abilityDamageType"]
+        self._toggle_state = ability_data["toggleState"]
+        self._ability_damage = ability_data["abilityDamage"]
+        self._behavior = ability_data["behavior"]
+        self._ability_type = ability_data["abilityType"]
+        self._max_level = ability_data["maxLevel"]
+        self._cooldown_time_remaining = ability_data["cooldownTimeRemaining"]
+        self._ability_index = ability_data["abilityIndex"]
+        self._type = ability_data["type"]
+        self._name = ability_data["name"]
+        self._level = ability_data["level"]
+        self._mana_cost = ability_data["manaCost"]
+        self._hero_level_required_to_level_up = ability_data["heroLevelRequiredToLevelUp"]
 
-    DOTA_UNIT_TARGET_TEAM_NONE = 0
-    DOTA_UNIT_TARGET_TEAM_FRIENDLY = 1
-    DOTA_UNIT_TARGET_TEAM_ENEMY = 2
-    DOTA_UNIT_TARGET_TEAM_BOTH = 3
-    DOTA_UNIT_TARGET_TEAM_CUSTOM = 4
+    def get_name(self) -> str:
+        return self._name
 
-    DOTA_UNIT_TARGET_NONE = 0
-    DOTA_UNIT_TARGET_HERO = 1
-    DOTA_UNIT_TARGET_CREEP = 2
-    DOTA_UNIT_TARGET_BUILDING = 4
-    DOTA_UNIT_TARGET_MECHANICAL = 8
-    DOTA_UNIT_TARGET_COURIER = 16
-    DOTA_UNIT_TARGET_BASIC = 18
-    DOTA_UNIT_TARGET_OTHER = 32
-    DOTA_UNIT_TARGET_ALL = 63
-    DOTA_UNIT_TARGET_TREE = 64
-    DOTA_UNIT_TARGET_CUSTOM = 128
+    def get_ability_damage(self) -> int:
+        return self._ability_damage
 
-    def __init__(self, data):
-        super().__init__(data)
+    def get_ability_damage_type(self) -> int:
+        return self._ability_damage_type
 
-    def getAbilityDamage(self):
-        return self.data["abilityDamage"]
+    def get_ability_index(self) -> int:
+        return self._ability_index
 
-    def getAbilityDamageType(self):
-        return self.data["abilityDamageType"]
+    def get_ability_type(self) -> int:
+        return self._ability_type
 
-    def getAbilityIndex(self):
-        return self.data["abilityIndex"]
+    def get_behavior(self) -> int:
+        return self._behavior
 
-    def getAbilityType(self):
-        return self.data["abilityType"]
+    def get_cooldown_time_remaining(self) -> float:
+        return self._cooldown_time_remaining
 
-    def getBehavior(self):
-        return self.data["behavior"]
+    def get_level(self) -> int:
+        return self._level
 
-    def getCooldownTime(self):
-        return self.data["cooldownTime"]
+    def get_max_level(self) -> int:
+        return self._max_level
 
-    def getCooldownTimeRemaining(self):
-        return self.data["cooldownTimeRemaining"]
+    def get_target_flags(self) -> int:
+        return self._target_flags
 
-    def getLevel(self):
-        return self.data["level"]
+    def get_target_team(self) -> int:
+        return self._target_team
 
-    def getMaxLevel(self):
-        return self.data["maxLevel"]
+    def get_target_type(self) -> int:
+        return self._target_type
 
-    def getTargetFlags(self):
-        return self.data["targetFlags"]
+    def get_toggle_state(self) -> bool:
+        return self._toggle_state
 
-    def getTargetTeam(self):
-        return self.data["targetTeam"]
+    def get_mana_cost(self) -> int:
+        return self._mana_cost
 
-    def getTargetType(self):
-        return self.data["targetType"]
+    def get_hero_level_required_to_level_up(self) -> int:
+        """
+        Returns the hero level required to level up this ability. If the hero's level is less than this value, this ability cannot be leveled up.
+        """
+        return self._hero_level_required_to_level_up
 
-    def getToggleState(self):
-        return self.data["toggleState"]
+    def get_type(self) -> EntityType:
+        return EntityType.ABILITY

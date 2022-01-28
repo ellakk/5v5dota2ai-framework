@@ -1,15 +1,10 @@
 #!/usr/bin/env python3
 
-from src.game.BaseEntity import BaseEntity
+from game.enums.entity_type import EntityType
+from game.physical_entity import PhysicalEntity
 
 
-class Tree(BaseEntity):
-    def __init__(self, data):
-        data['name'] = 'tree'
-        data['team'] = 4
-        super().__init__(data)
+class Tree(PhysicalEntity):
 
-    def setData(self, data):
-        data['name'] = 'tree'
-        data['team'] = 4
-        super().setData(data)
+    def get_type(self) -> EntityType:
+        return EntityType.TREE

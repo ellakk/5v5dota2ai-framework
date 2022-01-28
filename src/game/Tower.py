@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-from src.game.Building import Building
+from game.enums.entity_type import EntityType
+from game.building import Building
 
 
 class Tower(Building):
-    def __init__(self, data):
-        super().__init__(data)
+    
+    def get_type(self) -> EntityType:
+        return EntityType.TOWER

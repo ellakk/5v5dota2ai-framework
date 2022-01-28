@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import random
-from src.game.Building import Building
-from src.game.Tower import Tower
+from src.game.building import Building
+from src.game.tower import Tower
 
 
 class BotExample:

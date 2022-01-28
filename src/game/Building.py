@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-from src.game.BaseNPC import BaseNPC
+from game.enums.entity_type import EntityType
+from game.unit import Unit
 
 
-class Building(BaseNPC):
-    def __init__(self, data):
-        super().__init__(data)
+class Building(Unit):
+
+    def get_type(self) -> EntityType:
+        return EntityType.BUILDING
