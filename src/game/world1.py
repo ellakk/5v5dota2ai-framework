@@ -16,6 +16,8 @@ from game.tree import Tree
 from game.courier import Courier
 from game.rune import Rune
 
+# All info from the world
+
 
 class World:
 
